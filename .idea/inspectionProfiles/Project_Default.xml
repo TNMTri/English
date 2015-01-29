@@ -1,0 +1,22 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0" is_locked="false">
+    <option name="myName" value="Project Default" />
+    <option name="myLocal" value="false" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="7">
+            <item index="0" class="java.lang.String" itemvalue="class" />
+            <item index="1" class="java.lang.String" itemvalue="nav-clear" />
+            <item index="2" class="java.lang.String" itemvalue="menu-close" />
+            <item index="3" class="java.lang.String" itemvalue="href" />
+            <item index="4" class="java.lang.String" itemvalue="ng-click" />
+            <item index="5" class="java.lang.String" itemvalue="ng-repeat" />
+            <item index="6" class="java.lang.String" itemvalue="ng-if" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+  </profile>
+</component>

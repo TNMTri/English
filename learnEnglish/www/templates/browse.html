@@ -1,5 +1,12 @@
 <ion-view view-title="Browse">
   <ion-content>
     <h1>Browse</h1>
+      Topic name here: <input type="text" ng-model="data.topic_name" name="topic_name">
+      <button ng-click="insert_topic_browse()">Insert Topic</button>
+      <button ng-click="select_topic_browse()">Show All</button>
+      <button ng-click="delete_topic_browse()">Delete All</button>
+      <ion-item ng-repeat="topic in topics">
+          {{topic.topic_name}}
+      </ion-item>
   </ion-content>
 </ion-view>

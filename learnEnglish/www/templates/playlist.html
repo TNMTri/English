@@ -1,5 +1,15 @@
-<ion-view view-title="Playlist">
-  <ion-content>
-    <h1>Playlist</h1>
-  </ion-content>
+<ion-view view-title="Topic" >
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-edit" ng-click="edit_topic()">
+        </button>
+        <button class="button button-icon button-clear ion-trash-b" ng-click="delete_topic()">
+        </button>
+        <button class="button button-icon button-clear ion-play" ng-click="play_topic()">
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <span ng-repeat="item in items">
+                {{item.content}}
+        </span>
+    </ion-content>
 </ion-view>
