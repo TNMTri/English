@@ -1,5 +1,11 @@
-<ion-view view-title="Search">
+<ion-view view-title="Play">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-stop" ng-click="stop_topic()" href="#/app/play">
+        </button>
+    </ion-nav-buttons>
   <ion-content>
-    <h1>Search</h1>
+      <ion-item ng-repeat="item in items">
+          {{item.content}}
+      </ion-item>
   </ion-content>
 </ion-view>

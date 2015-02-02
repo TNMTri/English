@@ -17,19 +17,29 @@
         </ion-header-bar>
         <ion-content>
             <ion-list>
-                <ion-item nav-clear menu-close href="#/app/browse">
+                <!--<ion-item nav-clear menu-close href="#/app/browse">
                     Test Page
-                </ion-item>
+                </ion-item>-->
                 <ion-item nav-clear menu-close href="#/app/playlists">
-                    Topic
+                    New Topic
                     <i class="icon ion-clipboard"></i>
                 </ion-item>
-                <ion-item nav-clear menu-close ng-click="show_new_topic()">
+                <!--<ion-item nav-clear menu-close ng-click="show_new_topic()">
                     New Topic
                     <i class="icon ion-plus"></i>
-                </ion-item>
-                <ion-item ng-repeat="topic in topics" href="#/app/playlist/{{topic.id}}">
+                </ion-item>-->
+                <ion-item ng-repeat="topic in topics" href="#/app/playlist/{{topic.id}}" class="item-remove-animate  item-icon-right" type="item-text-wrap">
                     {{topic.topic_name}}
+                    <i class="icon ion-chevron-right icon-accessory"></i>
+                    <!--<ion-option-button class="button-dark" ng-click="add_item_to_topic({{topic.id}})">
+                        Add
+                    </ion-option-button>-->
+                    <ion-option-button class="button-royal" ng-click="edit_topic_name({{topic.id}})">
+                        Edit
+                    </ion-option-button>
+                    <ion-option-button class="button-assertive" ng-click="delete_topic({{topic.id}})">
+                        Delete
+                    </ion-option-button>
                 </ion-item>
             </ion-list>
         </ion-content>

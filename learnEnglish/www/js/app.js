@@ -19,7 +19,6 @@ angular.module('starter', ['starter.controllers', 'ionic', 'ngCordova'])
     })
 
     .config(function ($stateProvider, $urlRouterProvider) {
-
         $stateProvider
             //menu:
             .state('app', {
@@ -28,6 +27,7 @@ angular.module('starter', ['starter.controllers', 'ionic', 'ngCordova'])
                 templateUrl: "templates/menu.html",
                 controller: 'AppCtrl'
             })
+
             //home page
             .state('app.playlists', {
                 url: "/playlists",
