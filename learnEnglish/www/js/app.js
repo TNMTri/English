@@ -15,6 +15,7 @@ angular.module('starter', ['starter.controllers', 'ionic', 'ngCordova'])
             db = $cordovaSQLite.openDB({ name: "my.db" });
             $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS topic (id integer primary key, topic_name text)");
             $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS item (id integer primary key, id_topic integer, content text)");
+
         });
     })
 
@@ -34,17 +35,17 @@ angular.module('starter', ['starter.controllers', 'ionic', 'ngCordova'])
                 views: {
                     'menuContent': {
                         templateUrl: "templates/playlists.html",
-                        controller: 'PlaylistsCtrl'
+                        controller: 'HomeCtrl'
                     }
                 }
             })
             //topic detail
-            .state('app.playlist', {
-                url: "/playlist/:id_topic",
+            .state('app.topic', {
+                url: "/topic/:id_topic",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/playlist.html",
-                        controller: 'PlaylistCtrl'
+                        templateUrl: "templates/topic.html",
+                        controller: 'TopicCtrl'
                     }
                 }
             })
@@ -60,7 +61,7 @@ angular.module('starter', ['starter.controllers', 'ionic', 'ngCordova'])
             })
             //test page
             .state('app.browse', {
-                url: "/browse",
+                url: "/browse/:id_topic",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/browse.html",

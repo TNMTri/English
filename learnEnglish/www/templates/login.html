@@ -1,21 +1,22 @@
 <ion-modal-view>
-  <ion-header-bar>
-    <h1 class="title">New Topic</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="close_new_topic()">Close</button>
-    </div>
-  </ion-header-bar>
-  <ion-content>
-    <form ng-submit="insert_topic()">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Topic Name</span>
-          <input type="text" ng-model="data.topic_name" name="topic_name" value="">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Save</button>
-        </label>
-      </div>
-    </form>
-  </ion-content>
+    <ion-header-bar>
+        <h1 class="title">New Topic</h1>
+
+        <div class="buttons">
+            <button class="button button-clear" ng-click="close_new_topic()">Close</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="insert_topic()">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Topic name:</span>
+                    <input type="text" ng-model="data.topic_name" name="topic_name" value="">
+                </label>
+                <label class="item">
+                    <button class="button button-block button-positive" type="submit">Save</button>
+                </label>
+            </div>
+        </form>
+    </ion-content>
 </ion-modal-view>

@@ -1,0 +1,25 @@
+<ion-view view-title="Topic">
+
+    <div class="bar bar-subheader">
+            <button class="button button-icon button-clear ion-play" ng-click="play_topic()"
+                    href="#/app/play/{{items(0).id}}">
+            </button>
+    </div>
+    <!--<div class="bar bar-header">
+        <button class="button button-icon icon ion-navicon"></button>
+        <div class="h1 title">Header Buttons</div>
+        <button class="button button-clear button-positive">Edit</button>
+    </div>-->
+
+    <ion-content class="has-subheader">
+        <ion-item ng-repeat="item in items">
+            {{item.content}}
+        </ion-item>
+        <center>
+            <span ng-if="items.length == 0">Topic này chưa có gì hết, bấm add để thêm đê!!!</span>
+        </center>
+        <ion-option-button class="button-full" ng-click="add_item_to_topic()">
+            Add
+        </ion-option-button>
+    </ion-content>
+</ion-view>
