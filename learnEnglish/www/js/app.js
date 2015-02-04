@@ -58,9 +58,9 @@ angular.module('starter', ['starter.controllers', 'ionic', 'ngCordova'])
                         controller: 'PlayCtrl'
                     }
                 }
-            })
+            });
             //test page
-            .state('app.browse', {
+            /*.state('app.browse', {
                 url: "/browse/:id_topic",
                 views: {
                     'menuContent': {
@@ -68,7 +68,7 @@ angular.module('starter', ['starter.controllers', 'ionic', 'ngCordova'])
                         controller: 'BrowseCtrl'
                     }
                 }
-            });
+            });*/
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/playlists');
     });

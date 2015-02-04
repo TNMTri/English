@@ -1,11 +1,18 @@
-<ion-view view-title="Play">
+<ion-view view-title="Play" hide-nav-bar="true">
+
+
+
     <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-stop" ng-click="stop_topic()" href="#/app/play">
+        <button class="button button-icon button-clear ion-stop" ng-click="stop_topic()">Stop
         </button>
     </ion-nav-buttons>
-    <ion-content>
-        <ion-item ng-repeat="item in items">
+
+    <ion-content ng-click="play_random()" padding="true" on-drag="play_random()" ng-data-init="play_random()">
+
+        <ion-item ng-repeat="item in item_random">
             {{item.content}}
         </ion-item>
+
     </ion-content>
+
 </ion-view>
