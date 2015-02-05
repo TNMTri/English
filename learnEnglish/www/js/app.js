@@ -59,16 +59,16 @@ angular.module('starter', ['starter.controllers', 'ionic', 'ngCordova'])
                     }
                 }
             });
-            //test page
-            /*.state('app.browse', {
-                url: "/browse/:id_topic",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/browse.html",
-                        controller: 'BrowseCtrl'
-                    }
-                }
-            });*/
+        //test page
+        /*.state('app.browse', {
+         url: "/browse/:id_topic",
+         views: {
+         'menuContent': {
+         templateUrl: "templates/browse.html",
+         controller: 'BrowseCtrl'
+         }
+         }
+         });*/
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/playlists');
     });

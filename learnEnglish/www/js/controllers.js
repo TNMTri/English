@@ -7,81 +7,71 @@ angular.module('starter.controllers', ['ngCordova', 'ionic'])
 
         $scope.items = [];
         $scope.data = {};
+        $scope.menu_button = 1;
 
-        $scope.init = function () {
-
-            var query = "SELECT * FROM topic";
-            $cordovaSQLite.execute(db, query).then(function (res) {
-                $scope.topics = [];
-                for (var i = 0; i < res.rows.length; i++) {
-                    $scope.topics.push({id: res.rows.item(i).id, topic_name: res.rows.item(i).topic_name})
-                }
-                alert("init");
-            }, function (err) {
-                console.error(err);
-            });
-        };
-
-        $scope.select_item = function () {
-            var query = "SELECT * FROM item ORDER BY id DESC";
-            $cordovaSQLite.execute(db, query).then(function (res) {
-                $scope.items = [];
-                for (var i = 0; i < res.rows.length; i++) {
-                    $scope.items.push({id: res.rows.item(i).id, id_topic: res.rows.item(i).id_topic, content: res.rows.item(i).content});
-                }
-                alert($scope.items);
-            });
-        };
-
+        //Onload:
         $scope.$watch("model", function (value) {
 
-            var query = "SELECT * FROM topic";
+            /*var query = "SELECT * FROM topic";
+             $cordovaSQLite.execute(db, query).then(function (res) {
+             $scope.topics = [];
+             for (var i = 0; i < res.rows.length; i++) {
+             $scope.topics.push({id: res.rows.item(i).id, topic_name: res.rows.item(i).topic_name})
+             }
+             alert("$watch");
+             }, function (err) {
+             console.error(err);
+             });*/
+
+            /*$scope.menu_button_click();
+             setTimeout(function () {
+
+             }, 100);*/
+        }, true);
+
+        /*$scope.select_item = function () {
+         var query = "SELECT * FROM item ORDER BY id DESC";
+         $cordovaSQLite.execute(db, query).then(function (res) {
+         $scope.items = [];
+         for (var i = 0; i < res.rows.length; i++) {
+         $scope.items.push({id: res.rows.item(i).id, id_topic: res.rows.item(i).id_topic, content: res.rows.item(i).content});
+         }
+         alert($scope.items);
+         });
+         };*/
+        //Menu button:
+        $scope.menu_button_click = function () {
+            if ($scope.menu_button == 1) {
+                $scope.select_topic();
+                $scope.menu_button = 0;
+            }
+        };
+
+        //Select all topic from data:
+        $scope.select_topic = function () {
+
+            var query = "SELECT * FROM topic ORDER BY id DESC";
             $cordovaSQLite.execute(db, query).then(function (res) {
                 $scope.topics = [];
                 for (var i = 0; i < res.rows.length; i++) {
                     $scope.topics.push({id: res.rows.item(i).id, topic_name: res.rows.item(i).topic_name})
                 }
-                alert("$watch");
             }, function (err) {
                 console.error(err);
             });
-        }, true);
+        };
 
-        /*$scope.show = function () {
-         var query = "SELECT * FROM topic";
+        /*$scope.select_items = function (id_topic) {
+         var query = "SELECT * FROM item WHERE id_topic = " + id_topic + " ORDER BY ID DESC";
          $cordovaSQLite.execute(db, query).then(function (res) {
-         $scope.topics = [];
+         $scope.items = [];
          for (var i = 0; i < res.rows.length; i++) {
-         $scope.topics.push({id: res.rows.item(i).id, topic_name: res.rows.item(i).topic_name})
+         $scope.items.push({id: res.rows.item(i).id, id_topic: id_topic, content: res.rows.item(i).content});
          }
          }, function (err) {
          console.error(err);
          });
          };*/
-
-        $scope.select_topic = function () {
-            var query = "SELECT * FROM topic";
-            $cordovaSQLite.execute(db, query).then(function (res) {
-                $scope.topics = [];
-                for (var i = 0; i < res.rows.length; i++) {
-                    $scope.topics.push({id: res.rows.item(i).id, topic_name: res.rows.item(i).topic_name})
-                }
-            }, function (err) {
-                console.error(err);
-            });
-        };
-
-        $scope.select_items = function (id_topic) {
-            var query = "SELECT * FROM item WHERE id_topic = " + id_topic + " ORDER BY ID DESC";
-            $cordovaSQLite.execute(db, query).then(function (res) {
-                $scope.items = [];
-                for (var i = 0; i < res.rows.length; i++) {
-                    $scope.items.push({id: res.rows.item(i).id, id_topic: id_topic, content: res.rows.item(i).content});
-                }
-            }, function (err) {
-                console.error(err);
-            });
-        };
 
         //Create modal (popup)
         $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -104,26 +94,16 @@ angular.module('starter.controllers', ['ngCordova', 'ionic'])
         $scope.insert_topic = function () {
             query = "INSERT INTO topic (topic_name) VALUES (?)";
             $cordovaSQLite.execute(db, query, [$scope.data.topic_name]).then(function (res) {
-                $scope.close_new_topic();
+                $state.go("app.topic", {id_topic: res.insertId});
             }, function (err) {
-                alertr(err);
+                alert(err);
             });
-
+            $scope.select_topic();
             $scope.close_new_topic();
-            //Select
-            var query = "SELECT * FROM topic";
-            $cordovaSQLite.execute(db, query).then(function (res) {
-                $scope.topics = [];
-                for (var i = 0; i < res.rows.length; i++) {
-                    $scope.topics.push({id: res.rows.item(i).id, topic_name: res.rows.item(i).topic_name})
-                }
-            }, function (err) {
-                console.error(err);
-            });
         };
 
+        //Rename topic:
         $scope.edit_topic_name = function (id_topic) {
-            alert("edit topic: " + id_topic);
             $scope.data = {};
             //Custom popup
             var myPopup = $ionicPopup.show({
@@ -158,75 +138,105 @@ angular.module('starter.controllers', ['ngCordova', 'ionic'])
         };
 
         $scope.delete_topic = function (id_topic) {
-            alert("delete topic: " + id_topic);
             var query = "DELETE FROM topic WHERE id = ?";
             $cordovaSQLite.execute(db, query, [id_topic]).then(function (res) {
                 $scope.select_topic();
-                var query = "DELETE FROM item WHERE id_topic = ?";
-                $cordovaSQLite.execute(db, query, [id_topic]).then(function (res) {
-                    //$scope.select_topic();
-                }, function (err) {
-                    alert(err);
-                });
             }, function (err) {
                 alert(err);
             });
         };
 
-        $scope.showPopup = function () {
+        /*$scope.showPopup = function () {
 
-        };
+         };*/
     })
 
     .controller('HomeCtrl', function ($scope, $ionicModal, $cordovaSQLite, $state) {
-        //Create modal (popup)
-        $ionicModal.fromTemplateUrl('templates/login.html', {
-            scope: $scope
-        }).then(function (modal) {
-            $scope.modal = modal;
-        });
 
-        //Open new topic modal
-        $scope.show_new_topic = function () {
-            $scope.modal.show();
-        };
+        $scope.$watch("model", function (value) {
 
-        //Close new topic modal
-        $scope.close_new_topic = function () {
-            $scope.modal.hide();
-        };
-
-        //Insert new topic.
-        $scope.insert_topic = function () {
-
-            var query = "INSERT INTO topic (topic_name) VALUES (?)";
-            $cordovaSQLite.execute(db, query, [$scope.data.topic_name]).then(function (res) {
-                $scope.modal.hide();
-                var query = "SELECT * FROM topic";
-                $cordovaSQLite.execute(db, query).then(function (res) {
-                    $scope.topics = [];
-                    for (var i = 0; i < res.rows.length; i++) {
-                        $scope.topics.push({id: res.rows.item(i).id, topic_name: res.rows.item(i).topic_name})
-                    }
-                }, function (err) {
-                    console.error(err);
-                });
-                /*$scope.topics.push({id: res.insertId, topic_name: $scope.data.topic_name});
-                 alert("Create new topic success.");
-                 $state.go("app");*/
+            var query = "SELECT * FROM topic";
+            $cordovaSQLite.execute(db, query).then(function (res) {
+                $scope.topics = [];
+                for (var i = 0; i < res.rows.length; i++) {
+                    $scope.topics.push({id: res.rows.item(i).id, topic_name: res.rows.item(i).topic_name})
+                }
+                alert("$watch");
             }, function (err) {
                 console.error(err);
             });
-        };
+
+
+        }, true);
+        //Create modal (popup)
+        /*$ionicModal.fromTemplateUrl('templates/login.html', {
+         scope: $scope
+         }).then(function (modal) {
+         $scope.modal = modal;
+         });
+
+         //Open new topic modal
+         $scope.show_new_topic = function () {
+         $scope.modal.show();
+         };
+
+         //Close new topic modal
+         $scope.close_new_topic = function () {
+         $scope.modal.hide();
+         };*/
+
+        //Insert new topic.
+        /*$scope.insert_topic = function () {
+
+         var query = "INSERT INTO topic (topic_name) VALUES (?)";
+         $cordovaSQLite.execute(db, query, [$scope.data.topic_name]).then(function (res) {
+         $scope.modal.hide();
+         var query = "SELECT * FROM topic";
+         $cordovaSQLite.execute(db, query).then(function (res) {
+         $scope.topics = [];
+         for (var i = 0; i < res.rows.length; i++) {
+         $scope.topics.push({id: res.rows.item(i).id, topic_name: res.rows.item(i).topic_name})
+         }
+         }, function (err) {
+         console.error(err);
+         });
+         */
+        /*$scope.topics.push({id: res.insertId, topic_name: $scope.data.topic_name});
+         alert("Create new topic success.");
+         $state.go("app");*/
+        /*
+         }, function (err) {
+         console.error(err);
+         });
+         };*/
     })
 
     .controller('TopicCtrl', function ($scope, $stateParams, $state, $cordovaSQLite, $ionicPopup) {
 
         var id_topic = $stateParams.id_topic;
         $scope.data.id_topic = id_topic;
-        $scope.title = "In Topic " + id_topic;
+
         $scope.$watch("model", function () {
-            var query = "SELECT * FROM item WHERE id_topic = " + id_topic + " ORDER BY ID DESC";
+
+            /*var query = "SELECT * FROM topic WHERE id = " + $scope.$stateParams;
+             $cordovaSQLite.execute(db, query).then(function (res) {
+             $scope.title = res.rows.item(0).topic_name;
+             });*/
+            $scope.title = $scope.data.topic_name;
+            query = "SELECT * FROM item WHERE id_topic = " + $scope.$stateParams + " ORDER BY id DESC";
+            $cordovaSQLite.execute(db, query).then(function (res) {
+                $scope.items = [];
+                for (var i = 0; i < res.rows.length; i++) {
+                    $scope.items.push({id: res.rows.item(i).id, id_topic: res.rows.item(i).id_topic, content: res.rows.item(i).content});
+                }
+            });
+            alert("không có " + $stateParams.id_topic);
+            /*var query = "SELECT * FROM topic WHERE id = " + $scope.data.id_topic;
+             $cordovaSQLite.execute(db, query).then(function (res) {
+             $scope.title = res.rows.item(0).topic_name;
+             });*/
+            $scope.title = $scope.data.topic_name;
+            query = "SELECT * FROM item WHERE id_topic = " + $scope.data.id_topic + " ORDER BY id DESC";
             $cordovaSQLite.execute(db, query).then(function (res) {
                 $scope.items = [];
                 for (var i = 0; i < res.rows.length; i++) {
@@ -237,12 +247,14 @@ angular.module('starter.controllers', ['ngCordova', 'ionic'])
 
         //Select all item in topic:
         $scope.select_item_in_topic = function () {
-            var query = "SELECT * FROM item WHERE id_topic = " + id_topic + "ORDER BY ID DESC";
+            var query = "SELECT * FROM item WHERE id_topic = " + id_topic + " ORDER BY id DESC";
             $cordovaSQLite.execute(db, query).then(function (res) {
                 $scope.items = [];
                 for (var i = 0; i < res.rows.length; i++) {
                     $scope.items.push({id: res.rows.item(i).id, id_topic: res.rows.item(i).id_topic, content: res.rows.item(i).content});
                 }
+            }, function (err) {
+                alert("Lỗi 246: " + JSON.stringify(err));
             });
         };
 
@@ -287,15 +299,36 @@ angular.module('starter.controllers', ['ngCordova', 'ionic'])
             });
         };
 
-        $scope.edit_item = function () {
-            /*var query = "SELECT * FROM item";
-             $cordovaSQLite.execute(db, query).then(function (res) {
-             $scope.items = [];
-             for (var i = 0; i < res.rows.length; i++) {
-             $scope.items.push({id: res.rows.item(i).id, id_topic: res.rows.item(i).id_topic, content: res.rows.item(i).content});
-             }
-             });
-             alert($scope.items);*/
+        $scope.edit_item = function (id, content) {
+            var myPopup = $ionicPopup.show({
+                template: '<input type="text" ng-model="data.content" value=content>',
+                title: 'Change item',
+                subTitle: 'Edit?',
+                scope: $scope,
+                buttons: [
+                    { text: 'Cancel' },
+                    {
+                        text: '<b>Save</b>',
+                        type: 'button-positive',
+                        onTap: function (e) {
+                            if (!$scope.data.content) {
+                                e.preventDefault();
+                            } else {
+                                return $scope.data.content;
+                            }
+                        }
+                    }
+                ]
+            });
+            myPopup.then(function (res) {
+                var query = "UPDATE item SET content = ? WHERE id = ?";
+                $cordovaSQLite.execute(db, query, [$scope.data.content, id]).then(function (res) {
+                    $scope.select_item_in_topic();
+                }, function (err) {
+                    alert(err);
+                });
+                myPopup.close();
+            });
         };
 
         $scope.delete_item = function (id_item) {
@@ -305,13 +338,13 @@ angular.module('starter.controllers', ['ngCordova', 'ionic'])
             });
             confirmPopup.then(function (res) {
                 if (res) {
-                    alert("ok, id: " + id_item);
+//                    alert("ok, id: " + id_item);
                     var query = "DELETE FROM item WHERE id = ?";
                     $cordovaSQLite.execute(db, query, [id_item]).then(function (res) {
                         $scope.select_item_in_topic();
-                        $state.go($state.current, {}, {reload: true});
+
                     }, function (err) {
-                        alert(err);
+                        alert("Có lỗi 336: " + JSON.stringify(err));
                     });
                 } else {
                     //console.log('You are not sure');
@@ -382,7 +415,7 @@ angular.module('starter.controllers', ['ngCordova', 'ionic'])
          });
          };*/
     })
-    .controller('PlayCtrl', function ($scope, $stateParams, $cordovaSQLite) {
+    .controller('PlayCtrl', function ($scope, $stateParams, $cordovaSQLite, $state) {
 
         var id_topic = $scope.data.id_topic;
         var max = $scope.data.max;
@@ -402,6 +435,6 @@ angular.module('starter.controllers', ['ngCordova', 'ionic'])
         };
 
         $scope.stop_topic = function () {
-            alert("stop here")
+            $state.go("app.topic", {id_topic: id_topic});
         }
     });

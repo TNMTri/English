@@ -9,9 +9,9 @@
     <ion-content>
         <form ng-submit="insert_topic()">
             <div class="list">
-                <label class="item item-input">
+                <label class="item item-input item-floating-label">
                     <span class="input-label">Topic name:</span>
-                    <input type="text" ng-model="data.topic_name" name="topic_name" value="">
+                    <input type="text" ng-model="data.topic_name" name="topic_name" value="" placeholder="Topic name:">
                 </label>
                 <label class="item">
                     <button class="button button-block button-positive" type="submit">Save</button>

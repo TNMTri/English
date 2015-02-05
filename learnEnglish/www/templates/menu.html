@@ -2,11 +2,9 @@
 
     <ion-side-menu-content>
         <ion-nav-bar class="bar-stable">
-            <!--<ion-nav-back-button>
-            </ion-nav-back-button>-->
             <ion-nav-buttons side="left">
                 <button class="button button-icon button-clear ion-navicon" menu-toggle="left"
-                        ng-click="select_topic()">
+                        ng-click="menu_button_click()">
                 </button>
             </ion-nav-buttons>
         </ion-nav-bar>
@@ -16,32 +14,28 @@
     <ion-side-menu side="left">
 
         <ion-header-bar class="bar-stable">
-            <h1 class="title">Menu</h1>
+            <b class="title">Menu</b>
         </ion-header-bar>
 
         <ion-content>
             <ion-list>
 
-                <a class="item-icon-right" href="#/app/playlists">
+                <a class="item-icon-right">
                     <ion-item nav-clear menu-close ng-click="show_new_topic()">
                         New Topic
-                        <i class="icon ion-clipboard"></i>
+                        <p class="icon ion-plus-circled"></p>
                     </ion-item>
                 </a>
-
-                <!--<ion-item nav-clear menu-close href="#/app/browse">
-                    Browse
-                </ion-item>-->
 
                 <ion-item ng-repeat="topic in topics" href="#/app/topic/{{topic.id}}"
                           class="item-remove-animate  item-icon-right" type="item-text-wrap">
                     {{topic.topic_name}}
-                    <i class="icon ion-chevron-right"></i>
-                    <ion-option-button class="button-calm" ng-click="edit_topic_name(topic.id)">
-                        Edit
+                    <i class="icon ion-chevron-left"></i>
+                    <ion-option-button class="button-calm item-icon-right" ng-click="edit_topic_name(topic.id)">
+                        <i class="icon ion-edit"></i>
                     </ion-option-button>
-                    <ion-option-button class="button-assertive" ng-click="delete_topic(topic.id)">
-                        Delete
+                    <ion-option-button class="button-assertive item-icon-right" ng-click="delete_topic(topic.id)">
+                        <i class="icon ion-trash-b"></i>
                     </ion-option-button>
                 </ion-item>
 
