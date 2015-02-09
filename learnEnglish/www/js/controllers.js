@@ -12,14 +12,14 @@ angular.module('starter.controllers', ['ngCordova', 'ionic'])
         $scope.menu_button = 1;
 
         $ionicLoading.show({
-            template: "<i class='ion ion-load-a'></i>",
+            template: "<i class='ion ion-load-a'>Loading, please wait...</i>",
             animation: 'fade-in',
             noBackdrop: true
         });
 
         setTimeout(function () {
             $ionicLoading.hide();
-            var query = "SELECT * FROM topic";
+            var query = "SELECT * FROM topic ORDER BY id DESC";
             $cordovaSQLite.execute(db, query, []).then(function (res) {
                 var topic_list =[];
 
@@ -28,7 +28,7 @@ angular.module('starter.controllers', ['ngCordova', 'ionic'])
                 }
                 $scope.topics = topic_list;
             });
-        }, 5000);
+        }, 10000);
 
         //Onload:
         $scope.$watch("model", function (value) {
@@ -262,7 +262,6 @@ angular.module('starter.controllers', ['ngCordova', 'ionic'])
                 $scope.items = [];
                 for (var i = 0; i < res.rows.length; i++) {
                     $scope.items.push({id: res.rows.item(i).id, id_topic: res.rows.item(i).id_topic, content: res.rows.item(i).content});
-                    alert(res.rows.item(i).content);
                 }
             }, function (err) {
                 alert("Lỗi 246: " + JSON.stringify(err));
@@ -312,7 +311,7 @@ angular.module('starter.controllers', ['ngCordova', 'ionic'])
 
         $scope.edit_item = function (id, content) {
             var myPopup = $ionicPopup.show({
-                template: '<input type="text" ng-model="data.content" value=content>',
+                template: '<input type="text" ng-model="data.content" placeholder="New!!!" ng-value="ee">',
                 title: 'Change item',
                 subTitle: 'Edit?',
                 scope: $scope,

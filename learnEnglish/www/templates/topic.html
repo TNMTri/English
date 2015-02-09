@@ -48,25 +48,23 @@
 
     <ion-content ng-if="items.length == 0" class="center">
         <ion-list>
-
-                <span ng-if="items.length == 0">No item in topic, click + to add. :)
-                <ion-item nav-clear menu-close ng-click="add_item_to_topic()"
-                          class="button button-full button-light button-large">
-                    <h1>
-                        <i class="icon ion-plus"></i>
-                        <br>
-                        Add Item
-                    </h1>
-                </ion-item>
-                </span>
-
+            <span>No item in topic, click + to add. :)
+            <ion-item nav-clear menu-close ng-click="add_item_to_topic()"
+                      class="button button-full button-light button-large">
+                <h1>
+                    <i class="icon ion-plus"></i>
+                    <br>
+                    Add Item
+                </h1>
+            </ion-item>
+            </span>
         </ion-list>
     </ion-content>
 
-    <ion-content ng-if="items.length > 0" style="margin-top: 40px">
-
-        <ion-list>
-            <ion-item ng-repeat="item in items" class="item-remove-animate item-icon-right" type="item-text-wrap"
+    <ion-content>
+        <ion-list ng-if="items.length > 0" style="margin-top: 40px">
+            <ion-item ng-repeat="item in items" ng-if="items.length > 0" class="item-remove-animate item-icon-right"
+                      type="item-text-wrap"
                       href="#">
                 {{item.content}}
                 <ion-option-button class="button-calm item-icon-right" ng-click="edit_item(item.id)">
