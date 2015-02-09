@@ -22,13 +22,14 @@
 
                 <a class="item-icon-right">
                     <ion-item nav-clear menu-close ng-click="show_new_topic()">
-                        New Topic
+                        <b>New Topic</b>
+
                         <p class="icon ion-plus-circled"></p>
                     </ion-item>
                 </a>
 
                 <ion-item ng-repeat="topic in topics" href="#/app/topic/{{topic.id}}"
-                          class="item-remove-animate  item-icon-right" type="item-text-wrap">
+                          class="item-remove-animate  item-icon-right" type="item-text-wrap" menu-close="true">
                     {{topic.topic_name}}
                     <i class="icon ion-chevron-left"></i>
                     <ion-option-button class="button-calm item-icon-right" ng-click="edit_topic_name(topic.id)">

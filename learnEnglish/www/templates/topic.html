@@ -34,17 +34,22 @@
 <ion-view view-title="{{title}}" class="center">
 
     <ion-nav-buttons side="right">
-        <button class="button button-clear button-balanced ion-play" href="#/app/play/{{1}}"
-                ng-click="play()">
-        </button>
+        <span ng-if="items.length > 0">
+            <button class="button button-clear button-balanced ion-play" href="#/app/play/{{1}}"
+                    ng-click="play()">
+            </button>
+        </span>
+
+        <span ng-if="items.length == 0">
+            <button class="button button-clear button-dark ion-play" ng-click="no_item()">
+            </button>
+        </span>
     </ion-nav-buttons>
 
-    <ion-content>
-
-
+    <ion-content ng-if="items.length == 0" class="center">
         <ion-list>
-            <center>
-                <span ng-if="items.length == 0">Topic này chưa có gì hết, bấm add để thêm đê!!!
+
+                <span ng-if="items.length == 0">No item in topic, click + to add. :)
                 <ion-item nav-clear menu-close ng-click="add_item_to_topic()"
                           class="button button-full button-light button-large">
                     <h1>
@@ -53,9 +58,14 @@
                         Add Item
                     </h1>
                 </ion-item>
-                    </span>
-            </center>
+                </span>
 
+        </ion-list>
+    </ion-content>
+
+    <ion-content ng-if="items.length > 0" style="margin-top: 40px">
+
+        <ion-list>
             <ion-item ng-repeat="item in items" class="item-remove-animate item-icon-right" type="item-text-wrap"
                       href="#">
                 {{item.content}}
@@ -63,17 +73,17 @@
                     <i class="icon ion-edit"></i>
                 </ion-option-button>
                 <ion-option-button class="button-assertive item-icon-right"
-                                   ng-click="delete_item(item.id, item.content)">
+                                   ng-click="delete_item(item.id)">
                     <i class="icon ion-trash-b"></i>
                 </ion-option-button>
             </ion-item>
         </ion-list>
     </ion-content>
 
-    <span ng-if="items.length != 0">
+    <span ng-if="items.length > 0">
         <div class="bar bar-footer bar-balanced">
             <div class="title" ng-click="add_item_to_topic()">
-                Add
+                Add Item
             </div>
         </div>
     </span>
