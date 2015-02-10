@@ -51,7 +51,7 @@ angular.module('starter', ['starter.controllers', 'ionic', 'ngCordova'])
             })
             //play topic
             .state('app.play', {
-                url: "/play/:id_topic",
+                url: "/play",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/play.html",
