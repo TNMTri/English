@@ -30,28 +30,41 @@
         align-items: center;
     }
 </style>
+<ion-view view-title="Play" hide-nav-bar="true">
 
-<ion-view view-title="Play" hide-nav-bar="true" style="background-image: url('http://www.clipartbest.com/cliparts/K9T/R6z/K9TR6zdie.jpeg'); background-size: 100%">
+    <ion-content ng-click="play_random()" on-drag-right="play_random()" padding="true" class="center">
 
-    <!--<ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-stop" ng-click="stop_topic()">Stop
-        </button>
-    </ion-nav-buttons>-->
-
-    <ion-content ng-click="play_random()" padding="true" on-drag="play_random()" ng-data-init="play_random()"
-                 class="center">
-
-        <!--<button class="button button-icon button-clear ion-stop" ng-click="stop_topic()">Stop
-        </button>-->
-
-        <p ng-repeat="item in item_random" style="text-align: center">
+        <p ng-repeat="item in items_play" style="text-align: center; font-size: x-large">
             {{item.content}}
         </p>
+
     </ion-content>
 
-    <div class="bar bar-footer bar-assertive">
+    <div class="tabs tabs-icon-top tabs-color-balanced">
+        <a class="tab-item">
+            <i class="icon ion-skip-backward" ng-click="previous_topic()"></i>
+            Previous
+        </a>
+        <a class="tab-item">
+            <i class="icon ion-stop" ng-click="stop_topic()"></i>
+            Stop
+        </a>
+        <a class="tab-item">
+            <i class="icon ion-skip-forward" ng-click="next_topic()"></i>
+            Next
+        </a>
+    </div>
+
+    <!--<div class="bar bar-footer bar-assertive">
+        <div class="title ion-stop" ng-click="previous_topic()">
+            Previous
+        </div>
         <div class="title ion-stop" ng-click="stop_topic()">
             Stop
         </div>
-    </div>
+        <div class="title ion-stop" ng-click="next_topic()">
+            Next
+        </div>
+    </div>-->
+
 </ion-view>
