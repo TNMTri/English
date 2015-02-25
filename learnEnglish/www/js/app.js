@@ -15,7 +15,12 @@ angular.module('starter', ['starter.controllers', 'ionic', 'ngCordova'])
             db = $cordovaSQLite.openDB({ name: "my.db" });
             $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS topic (id integer primary key, topic_name text)");
             $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS item (id integer primary key, id_topic integer, content text)");
-
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS tutorial (id integer primary key, flag_name text, status boolean)");
+            /*setTimeout(function () {
+             $cordovaSQLite.execute(db, "INSERT IF NOT EXISTS INTO tutorial (flag_name, status) VALUES ('start_flag', 'false')");
+             $cordovaSQLite.execute(db, "INSERT IF NOT EXISTS INTO tutorial (flag_name, status) VALUES ('create_topic_flag', 'false')");
+             $cordovaSQLite.execute(db, "INSERT IF NOT EXISTS INTO tutorial (flag_name, status) VALUES ('create_item_flag', 'false')");
+             }, 1000)*/
         });
     })
 

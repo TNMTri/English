@@ -1,7 +1,6 @@
-<ion-modal-view>
+<ion-modal-view class="new-topic">
     <ion-header-bar>
         <h1 class="title">New Topic</h1>
-
         <div class="buttons">
             <button class="button button-clear" ng-click="close_new_topic()">Close</button>
         </div>
@@ -11,7 +10,7 @@
             <div class="list">
                 <label class="item item-input item-floating-label">
                     <span class="input-label">Topic name:</span>
-                    <input type="text" ng-model="data.topic_name" name="topic_name" value="" placeholder="Topic name:"
+                    <input type="text" ng-model="data.topic_name" name="topic_name" placeholder="Topic name:"
                            autofocus="true">
                 </label>
                 <label class="item">
