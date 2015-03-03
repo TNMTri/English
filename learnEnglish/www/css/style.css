@@ -28,44 +28,67 @@
     -ms-flex-align: center;
     align-items: center;
 }
-.background{
+
+.background {
     background-image: url("../img/all.jpg");
     -webkit-background-size: 100% 100%;
     -moz-background-size: 100% 100%;
     background-size: 100% 100%;
 }
-.background-menu{
+
+.background-menu {
     background-image: url("../img/menu.jpg");
     -webkit-background-size: 100% 100%;
     -moz-background-size: 100% 100%;
     background-size: 100% 100%;
 }
+
 .item-menu {
     opacity: 0.8;
     border-radius: 25px;
 }
-.item-menu b{
+
+.item-menu b {
     font-weight: 900;
 }
+
 .item-menu-topic {
     opacity: 0.8;
     /*border-radius: 15px;*/
 }
-.button-new-topic i{
+
+.button-new-topic i {
     text-shadow: 0 0 5px #00ff52;
     font-family: Consolas;
 }
-.text-shadow{
+
+.text-shadow {
     text-shadow: 0 0 5px #00ff52;
 }
-.text-play{
+
+.text-play {
     text-shadow: 0 0 5px #00ff52;
     text-align: center;
     font-size: x-large;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 10px;
 }
-.new-topic{
+
+.new-topic {
     height: 10%;
     margin: auto;
+}
+
+.highlight-henshin {
+    background-color: #21ff00;
+    /*box-shadow: 50px 50px 5px #888888;*/
+}
+
+.custom-popup {
+    /*position: absolute;
+    margin-top: 30px;
+    width: 60%;
+    height: 10px;
+    margin-left: auto;
+    margin-right: auto;*/
 }

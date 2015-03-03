@@ -6,16 +6,24 @@
         </p>
     </ion-content>
 
-    <div class="tabs tabs-icon-top" style="background-color: #31CF5A">
-        <a class="tab-item" ng-click="previous_topic()" style="color: #000000; border-color: #45ff00">
+    <div class="tabs tabs-icon-top" style="background-color: #2aa600">
+        <a class="tab-item" ng-click="previous_topic()" style="color: #fcfaff" ng-if="data.previous == true">
             <i class="icon ion-skip-backward"></i>
             Previous
         </a>
-        <a class="tab-item" ng-click="stop_topic()" style="color: #000000; border-color: #45ff00">
-            <i class="icon ion-stop"></i>
-            Stop
+        <a class="tab-item" ng-click="previous_topic()" style="color: #000000" ng-if="data.previous == false">
+            <i class="icon ion-skip-backward"></i>
+            Previous
         </a>
-        <a class="tab-item" ng-click="next_topic()" style="color: #000000; border-color: #45ff00">
+        <a class="tab-item" ng-click="stop_topic()" style="color: #fcffff">
+            <i class="icon ion-close"></i>
+            Exit
+        </a>
+        <a class="tab-item" ng-click="next_topic()" style="color: #fcfaff" ng-if="data.next == true">
+            <i class="icon ion-skip-forward"></i>
+            Next
+        </a>
+        <a class="tab-item" ng-click="next_topic()" style="color: #000000" ng-if="data.next == false">
             <i class="icon ion-skip-forward"></i>
             Next
         </a>

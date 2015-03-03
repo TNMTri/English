@@ -17,19 +17,25 @@
 
         <ion-content class="background-menu">
             <ion-list>
-<br>
+                <br>
                 <a class="item-icon-right">
                     <ion-item nav-clear menu-close ng-click="show_new_topic()" class="item-menu">
                         <b>New Topic</b>
                         <p class="icon ion-plus-circled"></p>
                     </ion-item>
+                    <ion-item nav-clear menu-close ng-click="guide()" class="item-menu">
+                        <b>Guide</b>
+                        <p class="icon ion-help"></p>
+                    </ion-item>
                 </a>
 
                 <ion-item ng-repeat="topic in topics" href="#/app/topic/{{topic.id}}"
-                          class="item-remove-animate item-icon-right item-menu-topic" type="item-text-wrap" menu-close="true">
+                          class="item-remove-animate item-icon-right item-menu-topic" type="item-text-wrap"
+                          menu-close="true">
                     <b><a class="item-menu-topic">{{topic.topic_name}}</a></b>
                     <i class="icon ion-chevron-left"></i>
-                    <ion-option-button class="button-calm item-icon-right" ng-click="edit_topic_name(topic.id, topic.topic_name)">
+                    <ion-option-button class="button-calm item-icon-right"
+                                       ng-click="edit_topic_name(topic.id, topic.topic_name)">
                         <i class="icon ion-edit"></i>
                     </ion-option-button>
                     <ion-option-button class="button-assertive item-icon-right" ng-click="delete_topic(topic.id)">
